@@ -1,64 +1,64 @@
 .footer {
-  background-color: #ffffff;
-  border-radius: 0.5rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin: 1rem;
+	background-color: #ffffff;
+	border-radius: 0.5rem;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	margin: 1rem;
 }
 
 .footer.dark {
-  background-color: #1f2937;
+	background-color: #1f2937;
 }
 
 .container {
-  max-width: 1280px;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+	max-width: 1280px;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 1rem;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 }
 
 .container.sm {
-  text-align: center;
+	text-align: center;
 }
 
 .copyright {
-  font-size: 0.875rem;
-  color: #6b7280;
+	font-size: 0.875rem;
+	color: #6b7280;
 }
 
 .copyright.dark {
-  color: #9ca3af;
+	color: #9ca3af;
 }
 
 .menu {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  margin-top: 0.75rem;
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: #6b7280;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	margin-top: 0.75rem;
+	font-size: 0.875rem;
+	font-weight: 500;
+	color: #6b7280;
 }
 
 .menu.dark {
-  color: #9ca3af;
+	color: #9ca3af;
 }
 
 .menu li {
-  margin-right: 1.5rem;
+	margin-right: 1.5rem;
 }
 
 .menu li.md {
-  margin-right: 2.5rem;
+	margin-right: 2.5rem;
 }
 
 .menu-link {
-  text-decoration: none;
-  color: inherit;
+	text-decoration: none;
+	color: inherit;
 }
 
 .menu-link:hover {
-  text-decoration: underline; 
+	text-decoration: underline;
 }

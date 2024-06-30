@@ -1,39 +1,39 @@
 .blink {
-  animation: blinker 1s linear infinite;
+	animation: blinker 1s linear infinite;
 }
 
 @keyframes blinker {
-  50% {
-    opacity: 0;
-  }
+	50% {
+		opacity: 0;
+	}
 }
 
 div:first-child {
-  position: relative;
-  padding-bottom: 14px;
+	position: relative;
+	padding-bottom: 14px;
 }
 
 .errors-message {
-  position: absolute;
-  left: 0;
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: #dc2626;
-  animation: blink 1s infinite;
+	position: absolute;
+	left: 0;
+	font-size: 0.75rem;
+	font-weight: 600;
+	color: #dc2626;
+	animation: blink 1s infinite;
 }
 
 .label-valid,
 .label-invalid {
-  display: flex;
-  justify-content: flex-start;
-  font-size: 0.75rem;
-  font-weight: 500;
+	display: flex;
+	justify-content: flex-start;
+	font-size: 0.75rem;
+	font-weight: 500;
 }
 
 .label-valid {
-  color: #6b7280;
+	color: #6b7280;
 }
 
 .label-invalid {
-  color: #dc2626;
+	color: #dc2626;
 }

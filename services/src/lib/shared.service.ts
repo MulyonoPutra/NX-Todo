@@ -4,16 +4,15 @@ import { BehaviorSubject } from 'rxjs';
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+	providedIn: 'root',
 })
 export class SharedService {
+	private visibilitySource = new BehaviorSubject<boolean>(false);
+	currentVisibility = this.visibilitySource.asObservable();
 
-  private visibilitySource = new BehaviorSubject<boolean>(false);
-  currentVisibility = this.visibilitySource.asObservable();
+	constructor() {}
 
-  constructor() { }
-
-  changeVisibility(isVisible: boolean) {
-    this.visibilitySource.next(isVisible);
-  }
+	changeVisibility(isVisible: boolean) {
+		this.visibilitySource.next(isVisible);
+	}
 }

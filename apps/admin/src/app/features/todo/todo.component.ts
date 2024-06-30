@@ -12,85 +12,86 @@ import { Todo } from '../../core/domain/todo';
 import { TodoService } from '../../core/services/todo.service';
 
 @Component({
-  selector: 'ng-mf-todo',
-  standalone: true,
-  imports: [CommonModule, TableModule, HttpClientModule, CardModule, ToastModule],
-  templateUrl: './todo.component.html',
-  styleUrl: './todo.component.scss',
-  providers: [TodoService, MessageService]
+	selector: 'ng-mf-todo',
+	standalone: true,
+	imports: [CommonModule, TableModule, HttpClientModule, CardModule, ToastModule],
+	templateUrl: './todo.component.html',
+	styleUrl: './todo.component.scss',
+	providers: [TodoService, MessageService],
 })
 export class TodoComponent implements OnInit, OnDestroy {
+	todos!: Todo[];
+	private destroyed = new Subject();
 
-  todos!: Todo[];
-  private destroyed = new Subject();
+	columns = ['User Id', 'id', 'Title', 'Completed', 'Actions'];
 
-  columns = ['User Id', 'id', 'Title', 'Completed', 'Actions'];
+	constructor(
+		private readonly router: Router,
+		private readonly todoService: TodoService,
+		private readonly messageService: MessageService
+	) {}
 
-  constructor(
-    private readonly router: Router,
-    private readonly todoService: TodoService,
-    private readonly messageService: MessageService
-  ) { }
+	ngOnInit(): void {
+		this.findAll();
+	}
 
+	findAll(): void {
+		this.todoService
+			.findAll()
+			.pipe(takeUntil(this.destroyed))
+			.subscribe({
+				next: (response) => {
+					this.todos = response;
+				},
+				error: (error: HttpErrorResponse) => {
+					this.toastError(error.message);
+				},
+			});
+	}
 
-  ngOnInit(): void {
-    this.findAll();
-  }
+	onRemove(id: string): void {
+		this.todoService
+			.remove(id)
+			.pipe(takeUntil(this.destroyed))
+			.subscribe({
+				next: () => {
+					this.toastSuccess();
+				},
+				error: (error: HttpErrorResponse) => {
+					this.toastError(error.message);
+				},
+				complete: () => {
+					this.navigateAfterSucceed();
+				},
+			});
+	}
 
-  findAll(): void {
-    this.todoService
-      .findAll()
-      .pipe(takeUntil(this.destroyed))
-      .subscribe({
-        next: (response) => {
-          this.todos = response;
-        },
-        error: (error: HttpErrorResponse) => {
-          this.toastError(error.message)
-        },
-      });
-  }
+	onUpdate(id: string): void {
+		this.router.navigateByUrl(`/admin/todo-update/${id}`);
+	}
 
-  onRemove(id: string): void {
-    this.todoService
-      .remove(id)
-      .pipe(takeUntil(this.destroyed))
-      .subscribe({
-        next: () => {
-          this.toastSuccess();
-        },
-        error: (error: HttpErrorResponse) => {
-          this.toastError(error.message)
-        },
-        complete: () => {
-          this.navigateAfterSucceed();
-        },
-      });
-  }
+	navigateAfterSucceed(): void {
+		timer(1000)
+			.pipe(take(1))
+			.subscribe(() =>
+				this.router.navigateByUrl('/admin/todo').then(() => window.location.reload())
+			);
+	}
 
-  onUpdate(id: string): void {
-    this.router.navigateByUrl(`/admin/todo-update/${id}`);
-  }
+	toastSuccess() {
+		this.messageService.add({
+			severity: 'success',
+			summary: 'Success',
+			detail: 'Successfully Removed!',
+		});
+	}
 
-  navigateAfterSucceed(): void {
-    timer(1000)
-      .pipe(take(1))
-      .subscribe(() =>
-        this.router.navigateByUrl('/admin/todo').then(() => window.location.reload())
-      );
-  }
+	toastError(error: string): void {
+		this.messageService.add({ severity: 'error', summary: 'Error', detail: error });
+	}
 
-  toastSuccess() {
-    this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Successfully Removed!' });
-  }
-
-  toastError(error: string): void {
-    this.messageService.add({ severity: 'error', summary: 'Error', detail: error });
-  }
-
-  ngOnDestroy() {
-    this.destroyed.next(true);
-    this.destroyed.complete();
-  }
-
+	ngOnDestroy() {
+		this.destroyed.next(true);
+		this.destroyed.complete();
+	}
 }

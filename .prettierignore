@@ -4,3 +4,10 @@
 /.nx/cache
 /.nx/workspace-data
 .angular
+*.html
+**/.git
+**/.svn
+**/.hg
+node_modules
+.angular
+.vscode

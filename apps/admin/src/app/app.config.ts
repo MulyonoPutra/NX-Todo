@@ -6,10 +6,10 @@ import { appRoutes } from './app.routes';
 import { provideRouter } from '@angular/router';
 
 export const appConfig: ApplicationConfig = {
-  providers: [
-    provideHttpClient(withInterceptorsFromDi()),
-    provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(appRoutes),
-    MessageService
-  ],
+	providers: [
+		provideHttpClient(withInterceptorsFromDi()),
+		provideZoneChangeDetection({ eventCoalescing: true }),
+		provideRouter(appRoutes),
+		MessageService,
+	],
 };
