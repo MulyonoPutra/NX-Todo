@@ -1,0 +1,26 @@
+<p-card header="Todo">
+  <p-table [value]="todos" [tableStyle]="{ 'min-width': '30rem' }" [paginator]="true" [rows]="5"
+    [tableStyle]="{ 'min-width': '50rem' }" [rowsPerPageOptions]="[5, 10, 20]">
+    <ng-template pTemplate="header">
+      <tr>
+        @for (item of columns; track $index) {
+        <th>{{item}}</th>
+        }
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-todos>
+      <tr>
+        <td>{{ todos.userId }}</td>
+        <td>{{ todos.id }}</td>
+        <td>{{ todos.title }}</td>
+        <td>{{ todos.completed }}</td>
+        <div class="space-x-2">
+          <td><i class="pi pi-pencil" style="font-size: 1rem; cursor: pointer;" (click)="onUpdate(todos.id)"></i></td>
+          <td><i class="pi pi-trash" style="font-size: 1rem;  cursor: pointer;" (click)="onRemove(todos.id)"></i></td>
+        </div>
+      </tr>
+    </ng-template>
+  </p-table>
+</p-card>
+
+<p-toast></p-toast>
